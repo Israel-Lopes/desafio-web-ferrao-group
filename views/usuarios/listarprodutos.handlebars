@@ -1,0 +1,18 @@
+{{#if user}}
+<h4>Produtos cadastrados</h4>
+<div class="card">
+  <div class="card-body">
+      {{#each produtos}}
+      <div class="card mt-4">
+        <div class="card-body">
+          <h3>{{nome}}</h3>
+          <small>Data: {{date}}</small>
+        </div>
+      </div>
+      {{else}}
+        <h5>Nenhum produto cadastrado</h5>
+      {{/each}}
+  </div>
+</div>
+{{else}}
+{{/if}}
