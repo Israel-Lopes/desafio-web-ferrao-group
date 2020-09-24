@@ -2,5 +2,5 @@
 
 ### Instruções
 
-- Instale o modulo serve via npm `npm install
+- Instale o dependencias com npm install
 - Inicie o projeto pelo comando `npm run dev
