@@ -18,34 +18,45 @@ router.post('/registro', (req, res) => {
 
   let nome = req.body.nome;
   if (typeof nome == undefined || nome == null) {
-    erros.push({texto: 'Nome invalido'});
+    req.flash('error_msg', 'Nome invalido');
+    res.redirect('/');
+    return;
   }
 
   let email = req.body.email;
   if (typeof email == undefined || email == null) {
-    erros.push({texto: 'Email invalido'});
+    req.flash('error_msg', 'Email invalido');
+    res.redirect('/');
+    return;
   }
 
   let senha = req.body.senha1;
   if (typeof senha == undefined || senha == null) {
-    erros.push({texto: 'Senha invalido'});
+    req.flash('error_msg', 'Senha invalida');
+    res.redirect('/');
+    return;
   }
 
   if (senha.length < 4) {
-      erros.push({texto: 'Senha muito curta'});
+    req.flash('error_msg', 'Senha muito curta');
+    res.redirect('/');
+    return;
    }
 
   if (senha != req.body.senha2) {
-    erros.push({texto: 'As senhas sao diferentes, tente novamente'});
+    req.flash('error_msg', 'As senhas sao diferentes, tente novamente');
+    res.redirect('/');
+    return;
   }
 
   if (erros.length > 0) {
-      res.render('usuarios/registro', {erros: erros});
+      res.render('/', {erros: erros});
   }else{
     Usuario.findOne({email: req.body.email}).lean().then((usuario) => {
       if (usuario) {
         req.flash('error_msg', 'Ja existe uma conta com este email');
-        res.redirect('usuarios/registro');
+        res.redirect('/');
+        return;
       }else{
 
         const novoUsuario = new Usuario({
@@ -73,7 +84,7 @@ router.post('/registro', (req, res) => {
       }
     }).catch((err) => {
       req.flash('error_msg', 'Houve um erro interno');
-        res.redirect('/');
+      res.redirect('/');
     })
   }
 });
