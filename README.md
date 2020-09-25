@@ -2,5 +2,6 @@
 
 ### Instruções
 
-- Instale o modulo serve via npm `npm install
+- Instale as dependencias com npm install
 - Inicie o projeto pelo comando `npm run dev
+- Abrir navegador em localhost:3000
